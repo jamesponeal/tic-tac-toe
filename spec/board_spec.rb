@@ -98,22 +98,6 @@ describe "Board" do
     end
   end
 
-  describe "#immediate_move" do
-    it "Returns an available space on the board that is a winning move" do
-      expect(board2.immediate_move("O")).to eq 1
-    end
-
-    it "Returns nil if there is no winning move" do
-      expect(board1.immediate_move("O")).to eq nil
-    end
-  end
-
-  describe "#opposite_corner_move" do
-    it "Returns an available space on the board that is a winning move" do
-      expect(board3.opposite_corner_move("O")).to eq 8
-    end
-  end
-
   describe "#mark_board" do
     it "Marks the board with a marker in the chosen spot" do
       board1.mark_board("X", 4)

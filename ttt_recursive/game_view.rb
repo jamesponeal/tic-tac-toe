@@ -94,6 +94,11 @@ class GameView
     puts "I didn't understand your input, please try again."
   end
 
+  def display_invalid_marker_choice
+    wait_with_line(1,0.2)
+    puts "You must input either X or O."
+  end
+
   def wait_with_line(number, seconds)
     number.times do
       sleep(seconds)
