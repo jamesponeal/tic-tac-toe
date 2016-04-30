@@ -215,3 +215,25 @@ end
 # 7. Create fork.
 # 8. Random corner.
 # 9. Random space.
+
+
+
+
+# Computer move:
+  # 1. Copy board
+    # 1.1 Get available spaces
+    # 1.2 Make move
+    # 1.3 Check for game win or loss
+      # If win, return +10
+      # If loss, return -10
+      # else switch player & repeat 1.1
+
+# Classes:
+  # Controller - game management
+  # View - Get and send info to terminal
+  # Board -
+  # Player -
+
+# Module:
+  #
+

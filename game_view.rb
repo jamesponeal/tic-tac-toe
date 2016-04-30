@@ -1,4 +1,4 @@
-class GameView
+module GameView
 
   def print_title
     puts ""
@@ -68,14 +68,14 @@ class GameView
     gets.chomp
   end
 
-  def display_move(player, choice)
+  def display_move(name, choice)
     wait_with_line(1,0.2)
-    puts "#{player.name} has selected #{choice+1}."
+    puts "#{name} has selected #{choice+1}."
   end
 
-  def ask_for_human_move(player)
+  def ask_for_human_move(name)
     wait_with_line(1,0.2)
-    puts "#{player.name}, please choose a space:"
+    puts "#{name}, please choose a space:"
     gets.chomp
   end
 

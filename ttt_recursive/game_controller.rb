@@ -9,32 +9,60 @@ class GameController
   def initialize(board = GameBoard.new)
     @view = GameView.new
     @board = board
+    @current_player = nil
     @game_over = false
     @winner = nil
+    @p1 = Player.new
+    @p2 = Player.new
   end
+
+  # Game setup
 
   def game_setup
     @view.print_title
     game_type = get_game_type
     if game_type == "1" #human vs computer
-      @view.display_game_type("human vs. computer")
-      who_goes_first = get_first_move_choice
-      @view.display_who_goes_first(who_goes_first)
-      if who_goes_first == "1"
-        name1 = @view.ask_player_name(who_goes_first)
-        create_players(name1, "human", "Computer", "computer")
-      else
-        name2 = @view.ask_player_name(who_goes_first)
-        create_players("Computer", "computer", name2, "human")
-      end
+      setup_human_vs_computer
     elsif game_type == "2" #human vs human
-      @view.display_game_type("human vs. human")
-      name1 = @view.ask_player_name("1")
-      name2 = @view.ask_player_name("2")
-      create_players(name1, "human", name2, "human")
+      setup_human_vs_human
     elsif game_type == "3" #computer vs computer
-      @view.display_game_type("computer vs. computer")
-      create_players("Computer 1", "computer", "Computer 2", "computer")
+      setup_computer_vs_computer
+    end
+  end
+
+  def setup_human_vs_computer
+    @view.display_game_type("human vs. computer")
+    who_goes_first = get_first_move_choice
+
+    @view.display_who_goes_first(who_goes_first)
+    if who_goes_first == "1"
+      name1 = @view.ask_player_name(who_goes_first)
+      create_players(name1, "human", "Computer", "computer")
+    else
+      name2 = @view.ask_player_name(who_goes_first)
+      create_players("Computer", "computer", name2, "human")
+    end
+  end
+
+  def setup_human_vs_human
+    @view.display_game_type("human vs. human")
+    name1 = @view.ask_player_name("1")
+    name2 = @view.ask_player_name("2")
+    create_players(name1, "human", name2, "human")
+  end
+
+  def setup_computer_vs_computer
+    @view.display_game_type("computer vs. computer")
+    create_players("Computer 1", "computer", "Computer 2", "computer")
+  end
+
+
+  def get_marker_choice(name)
+    until marker == 'X' || marker == 'O'
+      marker = @view.ask_player_marker(name1)
+      if marker != 'X' && marker != 'O'
+        @view.display_invalid_marker_choice
+      end
     end
   end
 
@@ -111,6 +139,10 @@ class GameController
       @game_over = true
       @winner = player
     end
+  end
+
+  def switch_player
+    current_player == @p1 ? @p2 : @p1
   end
 
 end
