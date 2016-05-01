@@ -36,7 +36,7 @@ module ComputerPlayer
     count = 0
     board.free_spaces.each do |space|
       board.mark_board(marker, space.to_i-1)
-        count += 1 if check_for_win
+        count += 1 if board.check_for_win
       board.mark_board(space, space.to_i-1)
     end
     count
@@ -47,7 +47,7 @@ module ComputerPlayer
     high_score = 0
     board.free_spaces.each do |space|
       board.mark_board(marker, space.to_i-1)
-      count = count_possible_future_wins(marker)
+      count = count_possible_future_wins(board, marker)
       if count > high_score
         high_score = count
         choice = space.to_i-1
