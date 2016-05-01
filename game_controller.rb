@@ -7,15 +7,16 @@ class GameController
   include GameSetup
   include GameView
 
-  def initialize(board = GameBoard.new)
+  attr_reader :game_over, :winner
+  attr_accessor :current_player
+
+  def initialize(board = GameBoard.new, p1 = Player.new, p2 = Player.new)
     @board = board
     @current_player = nil
     @game_over = false
     @winner = nil
-    @p1 = Player.new
-    @p2 = Player.new
-    print_title
-    game_setup
+    @p1 = p1
+    @p2 = p2
   end
 
   def play_game
