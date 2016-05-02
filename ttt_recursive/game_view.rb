@@ -1,4 +1,4 @@
-class GameView
+module GameView
 
   def print_title
     puts ""
@@ -68,14 +68,14 @@ class GameView
     gets.chomp
   end
 
-  def display_move(player, choice)
+  def display_move(name, choice)
     wait_with_line(1,0.2)
-    puts "#{player.name} has selected #{choice+1}."
+    puts "#{name} has selected #{choice+1}."
   end
 
-  def ask_for_human_move(player)
+  def ask_for_human_move(name)
     wait_with_line(1,0.2)
-    puts "#{player.name}, please choose a space:"
+    puts "#{name}, please choose a space:"
     gets.chomp
   end
 
@@ -83,8 +83,10 @@ class GameView
     wait_with_line(1,0.2)
     if winner == "tie"
       puts "Game Over!!! The game ended in a tie!"
-    else
+    elsif winner.type == "human"
       puts "Game Over!!! Congratulations #{winner.name}, you won!!"
+    else
+      puts "Game Over!!! Unfortunately you lost to the computer. Better luck next time!"
     end
     wait_with_line(1,0.2)
   end
@@ -92,11 +94,6 @@ class GameView
   def display_invalid_input
     wait_with_line(1,0.2)
     puts "I didn't understand your input, please try again."
-  end
-
-  def display_invalid_marker_choice
-    wait_with_line(1,0.2)
-    puts "You must input either X or O."
   end
 
   def wait_with_line(number, seconds)
