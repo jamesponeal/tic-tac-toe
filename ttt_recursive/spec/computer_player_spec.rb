@@ -60,122 +60,33 @@ describe "ComputerPlayer" do
   end
 
 
-  # describe "select_best_move" do
-  #   it "selects best move from a hash of scored moves" do
-  #     expect(c3po.select_best_move({"8"=>0, "9"=>10})).to eq(8)
-  #   end
-
-  #   it "selects best move from a hash of scored moves" do
-  #     expect(c3po.select_best_move({"4"=>-9, "5"=>-7, "6"=>-9, "7"=>-9, "9"=>-9})).to eq(4)
-  #   end
-  # end
-
-
   # get_score(board, opponent_marker, current_marker, space, depth = 0)
   describe "get_score" do
-
-    # board: almost_won, space 8("9") should be best move
-    it "" do
+    it "returns 10 when choosing a winning move" do
       expect(c3po.get_score(almost_won,"X",c3po.marker,8,0)).to eq 10
     end
 
-    it "" do
+    it "returns -9 when choosing a move that results in a loss on opponents move" do
       expect(c3po.get_score(almost_won,"X",c3po.marker,7,0)).to eq -9
     end
-
-
-    # board: almost_won2, space 5("6") should be best move
-    it "" do
-      expect(c3po.get_score(almost_won2,"X",c3po.marker,1,0)).to eq -9
-    end
-
-    it "" do
-      expect(c3po.get_score(almost_won2,"X",c3po.marker,2,0)).to eq -9
-    end
-
-    it "" do
-      expect(c3po.get_score(almost_won2,"X",c3po.marker,5,0)).to eq 0
-    end
-
-    it "" do
-      expect(c3po.get_score(almost_won2,"X",c3po.marker,6,0)).to eq -9
-    end
-
-    it "" do
-      expect(c3po.get_score(almost_won2,"X",c3po.marker,7,0)).to eq -9
-    end
-
-
-    # board: board 1
-    it "" do
-      expect(c3po.get_score(board1,"X",c3po.marker,0,0)).to eq -17
-    end
-
-    it "" do
-      expect(c3po.get_score(board1,"X",c3po.marker,4,0)).to eq -17
-    end
-
-
-    # board3:
-
-    # it "" do
-    #   expect(c3po.get_score(board3,"X",c3po.marker,1,0)).to eq 1
-    # end
-
-    # it "" do
-    #   expect(c3po.get_score(board3,"X",c3po.marker,2,0)).to eq 1
-    # end
-
-    # it "" do
-    #   expect(c3po.get_score(board3,"X",c3po.marker,3,0)).to eq 1
-    # end
-
-    # it "" do
-    #   expect(c3po.get_score(board3,"X",c3po.marker,5,0)).to eq 1
-    # end
-
-    # it "" do
-    #   expect(c3po.get_score(board3,"X",c3po.marker,6,0)).to eq 1
-    # end
-
-    # it "" do
-    #   expect(c3po.get_score(board3,"X",c3po.marker,7,0)).to eq 1
-    # end
-
-    # it "" do
-    #   expect(c3po.get_score(board3,"X",c3po.marker,8,0)).to eq 1
-    # end
-  end
-
-  # score_available_moves(board, opponent_marker, current_marker, depth = 0)
-  describe "score_available_moves" do
-    # it "returns scores" do
-    #   expect(c3po.score_available_moves(almost_won2,"X",c3po.marker,0)).to eq -9
-    # end
-
-    # it "returns scores" do
-    #   expect(c3po.score_available_moves(board1,"X",c3po.marker,0)).to eq 0
-    # end
-
-    # it "returns scores" do
-    #   expect(c3po.score_available_moves(almost_board2, "X")).to eq {"4"=>-9, "5"=>-7, "6"=>-9, "7"=>-9, "9"=>-9}
-    # end
-
-    # it "returns scores" do
-    #   expect(c3po.score_available_moves(board1, "X")).to eq "1"
-    # end
   end
 
   describe "get_best_move" do
-    # it "returns best move" do
-    #   expect(c3po.get_best_move(board3,"X")).to eq 1
-    # end
+    it "returns best move as side space when player is in middle and opponent is corner" do
+      expect(c3po.get_best_move(board3,"X")).to eq 1
+    end
 
-    # it "returns best move" do
-    #   expect(c3po.get_best_move(board1,"X")).to eq 0
-    # end
+    it "returns best move as corner on a new board" do
+      expect(c3po.get_best_move(board1,"X")).to eq 0
+    end
 
+    it "returns best move as a winning move" do
+      expect(c3po.get_best_move(almost_won,"X")).to eq 8
+    end
+
+    it "returns best move as a blocking move" do
+      expect(c3po.get_best_move(almost_won2,"X")).to eq 5
+    end
   end
-
 
 end

@@ -16,11 +16,14 @@ class GameController
     @current_player = nil
     @game_over = false
     @winner = nil
+    @p1 = nil
+    @p2 = nil
   end
 
   def play_game
     until game_over
       print_board(@board)
+      puts "#{@current_player.name} is thinking..." if @current_player.type == "computer"
       play_turn
       check_for_game_over(@current_player)
       switch_player
@@ -37,7 +40,9 @@ class GameController
       else
         choice = @current_player.get_best_move(@board, other_player.marker)
       end
-      if @board.valid_choice?(choice+1)
+      if choice == nil
+        return nil
+      elsif @board.valid_choice?(choice+1)
         @board.mark_board(@current_player.marker, choice)
         display_move(@current_player.name, choice)
       else
