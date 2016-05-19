@@ -6,6 +6,4 @@ class HumanPlayer < Player
     super(name, marker, type)
   end
 
-
-
 end
