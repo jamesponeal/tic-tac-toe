@@ -6,7 +6,6 @@ class ComputerPlayer < Player
     super(name, marker, type)
   end
 
-
   def switch_marker(opponent_marker, current_marker)
     current_marker == marker ? opponent_marker : marker
   end
@@ -18,7 +17,6 @@ class ComputerPlayer < Player
       return scores.max_by{|k,v| v}[1]
     end
   end
-
 
   #gets score of an individual move
   def get_score(board, opponent_marker, current_marker, space, depth = 0)
@@ -52,6 +50,5 @@ class ComputerPlayer < Player
     best_move = scores.max_by{|k,v| v}[0]
     return best_move.to_i-1
   end
-
 
 end
