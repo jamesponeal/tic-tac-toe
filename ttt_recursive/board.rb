@@ -81,35 +81,8 @@ class GameBoard
     end
   end
 
-  def switch_marker(player_marker, opponent_marker, current_marker)
-    current_marker == player_marker ? opponent_marker : player_marker
-  end
 
-  def get_score(player_marker, opponent_marker, current_marker, space, depth = 0)
-    mark_board(current_marker, space)
-    if check_for_win
-      return score_move(player_marker, depth)
-    elsif check_for_tie
-      return 0
-    else
-      depth += 1
-      next_marker = switch_marker(player_marker, opponent_marker, current_marker)
-      scores = []
-      puts ""
-      puts "************"
-      puts "depth: #{depth}"
-      puts "board: #{board}"
-      free_spaces.each do |space|
-        score = get_score(player_marker, opponent_marker, next_marker, space.to_i-1, depth)
-        puts "------"
-        puts "board: #{board}"
-        puts "space: #{space}"
-        puts "score: #{score}"
-        scores << score
-      end
-      return scores.min
-    end
-  end
+
 
 
 end

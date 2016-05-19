@@ -27,6 +27,10 @@ describe "Board" do
   # O 2 3
   # X 5 X
   # O 8 9
+  let!(:almost_board3) {GameBoard.new(board_array = ["O", "2", "3", "X", "X", "6", "7", "8", "O"])}
+  # O 2 3
+  # X X 6
+  # 7 8 O
 
   describe "Board Creation" do
     it "Creates a board object" do
@@ -103,6 +107,18 @@ describe "Board" do
       expect(board1.check_for_win).to be false
     end
 
+    it "Returns false if board is not in a win condition" do
+      expect(almost_board1.check_for_win).to be false
+    end
+
+    it "Returns false if board is not in a win condition" do
+      expect(almost_board2.check_for_win).to be false
+    end
+
+    it "Returns false if board is not in a win condition" do
+      expect(almost_board3.check_for_win).to be false
+    end
+
     it "Returns true if board is in a win condition" do
       expect(won_board.check_for_win).to be true
     end
@@ -169,36 +185,7 @@ describe "Board" do
     end
   end
 
-  describe "switch_marker" do
-    it "switches the current marker and returns it" do
-      expect(board1.switch_marker("X","O","X")).to eq("O")
-    end
 
-    it "switches the current marker and returns it" do
-      expect(board1.switch_marker("X","O","O")).to eq("X")
-    end
-  end
 
-  describe "get_score" do
-    it "returns positive score of a board with an imminent win when correct choice is made" do
-      expect(almost_board1.get_score("X","O","X",7,0)).to eq 10
-    end
-
-    it "returns tie score of a board with an imminent win when incorrect choice is made" do
-      expect(almost_board1.get_score("X","O","X",8,0)).to eq 0
-    end
-
-    it "returns positive score of a board with an imminent win when correct choice is made with depth" do
-      expect(almost_board1.get_score("X","O","X",7,1)).to eq 9
-    end
-
-    it "returns score of a board with an imminent loss" do
-      expect(almost_board1.get_score("X","O","O",8,0)).to eq -10
-    end
-
-    it "returns score on a move on partially complete board" do
-      expect(almost_board2.get_score("O","X","O",4)).to eq -9
-    end
-  end
 
 end

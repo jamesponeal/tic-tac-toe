@@ -1,6 +1,7 @@
 require_relative 'board'
 require_relative 'game_view'
-require_relative 'player'
+require_relative 'human_player'
+require_relative 'computer_player'
 require_relative 'game_setup'
 
 class GameController
@@ -8,15 +9,13 @@ class GameController
   include GameView
 
   attr_reader :game_over, :winner
-  attr_accessor :current_player
+  attr_accessor :current_player, :other_player, :p1, :p2
 
-  def initialize(board = GameBoard.new, p1 = Player.new, p2 = Player.new)
+  def initialize(board = GameBoard.new)
     @board = board
     @current_player = nil
     @game_over = false
     @winner = nil
-    @p1 = p1
-    @p2 = p2
   end
 
   def play_game
@@ -34,10 +33,9 @@ class GameController
     choice = nil
     until choice
       if @current_player.type == "human"
-        choice = @current_player.get_human_move
+        choice = get_human_move
       else
-        opponent_marker = other_player.marker
-        choice = @current_player.get_computer_move(@board, opponent_marker)
+        choice = @current_player.get_best_move(@board, other_player.marker)
       end
       if @board.valid_choice?(choice+1)
         @board.mark_board(@current_player.marker, choice)
@@ -46,6 +44,15 @@ class GameController
         display_invalid_input
         choice = nil
       end
+    end
+  end
+
+  def get_human_move
+    human_choice = ask_for_human_move(@current_player.name)
+    if human_choice == "pass"
+      return nil
+    else
+      human_choice.to_i-1
     end
   end
 
