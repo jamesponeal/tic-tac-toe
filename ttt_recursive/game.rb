@@ -1,3 +1,5 @@
+require_relative 'game_setup'
+require_relative 'game_view'
 require_relative 'game_controller'
 
 game = GameController.new

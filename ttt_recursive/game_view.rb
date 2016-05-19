@@ -93,7 +93,7 @@ module GameView
 
   def display_invalid_input
     wait_with_line(1,0.2)
-    puts "I didn't understand your input, please try again."
+    puts "Invalid input, please try again."
   end
 
   def wait_with_line(number, seconds)
