@@ -15,22 +15,6 @@ class GameBoard
     free_spaces
   end
 
-  # def free_corner_spaces
-  #   corner_spaces = []
-  #   free_spaces.each do |space|
-  #     corner_spaces << space if ["1", "3", "7", "9"].include?(space)
-  #   end
-  #   corner_spaces
-  # end
-
-  # def free_side_spaces
-  #   side_spaces = []
-  #   free_spaces.each do |space|
-  #     side_spaces << space if ["2", "4", "6", "8"].include?(space)
-  #   end
-  #   side_spaces
-  # end
-
   def valid_choice?(choice)
     (1..9).include?(choice) && free_spaces.include?(choice.to_s) ? true : false
   end
@@ -80,9 +64,6 @@ class GameBoard
       return depth - @score
     end
   end
-
-
-
 
 
 end
