@@ -1,13 +1,5 @@
 module GameSetup
 
-  # Game setup
-    # Determine game type
-      # If human v computer or human vs human:
-        # Get human name(s)
-        # Get first player choice
-        # Get human marker choice
-    # Set player info
-
   def game_setup
     game_type = get_game_type
     if game_type == "1" #human vs computer
@@ -28,7 +20,7 @@ module GameSetup
     display_who_goes_first(who_goes_first)
     name = ask_player_name(who_goes_first)
     human_marker = get_marker_choice(name)
-    computer_marker = get_computer_marker(human_marker)
+    computer_marker = get_other_marker(human_marker)
     set_player_info(@p1, name, human_marker)
     set_player_info(@p2, "Computer", computer_marker)
   end
@@ -37,10 +29,11 @@ module GameSetup
     display_game_type("human vs. human")
     @p1 = HumanPlayer.new
     @p2 = HumanPlayer.new
+    @current_player = @p1
     name1 = ask_player_name("1")
     marker1 = get_marker_choice(name1)
     name2 = ask_player_name("2")
-    marker2 = get_marker_choice(name2)
+    marker2 = get_other_marker(marker1)
     current_player = @p1
     set_player_info(@p1, name1, marker1)
     set_player_info(@p2, name2, marker2)
@@ -49,14 +42,15 @@ module GameSetup
   def setup_computer_vs_computer
     @p1 = ComputerPlayer.new
     @p2 = ComputerPlayer.new
+    @current_player = @p1
     display_game_type("computer vs. computer")
     set_player_info(@p1, "Computer 1", "X")
     set_player_info(@p2, "Computer 2", "O")
   end
 
-  def get_computer_marker(human_marker)
-    human_marker == "X" ? computer_marker = "O" : computer_marker = "X"
-    computer_marker
+  def get_other_marker(taken_marker)
+    taken_marker == "X" ? other_marker = "O" : other_marker = "X"
+    other_marker
   end
 
   def get_marker_choice(name, marker = nil)

@@ -60,33 +60,6 @@ describe "Board" do
     end
   end
 
-  # describe "#free_corner_spaces" do
-  #   it "returns array of empty corner spaces" do
-  #     expect(board1.free_corner_spaces).to eq(["1", "3", "7", "9"])
-  #   end
-
-  #   it "returns array of empty corner spaces" do
-  #     expect(board2.free_corner_spaces).to eq(["9"])
-  #   end
-
-  #   it "returns array of empty corner spaces" do
-  #     expect(tie_board.free_corner_spaces).to eq([])
-  #   end
-  # end
-
-  # describe "#free_side_spaces" do
-  #   it "returns array of empty side spaces" do
-  #     expect(board1.free_side_spaces).to eq(["2", "4", "6", "8"])
-  #   end
-
-  #   it "returns array of empty side spaces" do
-  #     expect(won_board.free_side_spaces).to eq(["4", "6", "8"])
-  #   end
-
-  #   it "returns array of empty side spaces" do
-  #     expect(tie_board.free_side_spaces).to eq([])
-  #   end
-  # end
 
   describe "#valid_choice?" do
     it "returns true if the choice is available" do
@@ -184,8 +157,5 @@ describe "Board" do
       expect(won_board.score_move("X", 2)).to eq -8
     end
   end
-
-
-
 
 end
